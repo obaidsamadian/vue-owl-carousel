@@ -245,7 +245,34 @@ Example : `:responsive="{0:{items:1,nav:false},600:{items:3,nav:true}}"`
 
 Object containing responsive options. Can be set to false to remove responsive capabilities.
 
-## Available events
+
+
+### Event Trigger Fix
+ You can access to owl instance in its parent by adding `onOwlInit` event.
+
+Usage
+ 
+ ```
+ <carousel onOwlInit="getOwlInstance" >
+ 
+   ... 
+ 
+ </carousel>
+ 
+<script>
+
+import events from './utils/events';
+
+export default {
+  methods:{
+    getOwlInstance(owlInstance){
+      owlInstance.trigger('next.owl.carousel');
+    }
+  }
+}
+ 
+ ```
+ ## Available events
 
 The trigger timing can see [Owl Carousel document](https://owlcarousel2.github.io/OwlCarousel2/demos/events.html)
 
