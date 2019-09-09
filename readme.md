@@ -253,7 +253,7 @@ Object containing responsive options. Can be set to false to remove responsive c
 Usage
  
  ```
- <carousel onOwlInit="getOwlInstance" >
+ <carousel @onOwlInit="getOwlInstance" >
  
    ... 
  
