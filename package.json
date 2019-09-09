@@ -5,8 +5,13 @@
   "author": {
     "name": "Leo Chien <s950329@gmail.com>"
   },
+  "contributors": [{
+    "name": "Obaid Samadian",
+    "email": "obaidsamadian@gmail.com",
+    "url": "https://obdev.org"
+  }],
   "bugs": {
-    "url": "https://github.com/s950329/vue-owl-carousel/issues"
+    "url": "https://github.com/obaidsamadian/vue-owl-carousel/issues"
   },
   "keywords": [
     "vuejs",

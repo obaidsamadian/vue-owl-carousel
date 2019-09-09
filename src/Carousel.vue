@@ -226,6 +226,8 @@ export default {
       prevHandler: 'carousel_prev_' + this.generateUniqueId(),
       elementHandle: 'carousel_' + this.generateUniqueId(),
       nextHandler: 'carousel_next_' + this.generateUniqueId(),
+
+      owl:null
     };
   },
 
@@ -282,22 +284,26 @@ export default {
       checkVisible: this.checkVisible,
     });
 
+    //Set Owl instance and return it to its parent
+    this.owl = owl;
+    this.$emit('onOwlInit',this.owl);
+
     $('#' + this.prevHandler).click(function() {
-      owl.trigger('prev.owl.carousel');
+      this.owl.trigger('prev.owl.carousel');
     });
 
     $('#' + this.nextHandler).click(function() {
-      owl.trigger('next.owl.carousel');
+      this.owl.trigger('next.owl.carousel');
     });
 
     events.forEach((eventName) => {
-      owl.on(`${eventName}.owl.carousel`, (event) => {
+      this.owl.on(`${eventName}.owl.carousel`, (event) => {
         this.$emit(eventName, event);
       });
     });
 
     if (!this.loop) {
-      owl.on('changed.owl.carousel', (event) => {
+      this.owl.on('changed.owl.carousel', (event) => {
         // start
         if (event.item.index === 0) {
           this.showPrev = false;
@@ -316,11 +322,19 @@ export default {
       });
     }
   },
-
+  refresh() {
+    this.owl.trigger('refresh.owl.carousel');
+  },
+  destroy() {
+    if (this.owl) {
+      this.owl.owlCarousel('destroy');
+    }
+  },
   methods: {
     generateUniqueId() {
       return Math.random().toString(36).substring(2, 15);
     },
+
   },
 };
 
