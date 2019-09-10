@@ -236,100 +236,103 @@ export default {
   },
 
   mounted: function() {
-    const owl = $('#' + this.elementHandle).owlCarousel({
-      items: this.items,
-      margin: this.margin,
-      loop: this.loop,
-      center: this.center,
-      mouseDrag: this.mouseDrag,
-      touchDrag: this.touchDrag,
-      pullDrag: this.pullDrag,
-      freeDrag: this.freeDrag,
-      stagePadding: this.stagePadding,
-      merge: this.merge,
-      mergeFit: this.mergeFit,
-      autoWidth: this.autoWidth,
-      startPosition: this.startPosition,
-      uRLhashListener: this.uRLhashListener,
-      nav: this.nav,
-      rewind: this.rewind,
-      navText: this.navText,
-      navElement: this.navElement,
-      slideBy: this.slideBy,
-      slideTransition: this.slideTransition,
-      dots: this.dots,
-      dotsEach: this.dotsEach,
-      dotsData: this.dotsData,
-      lazyLoad: this.lazyLoad,
-      lazyLoadEager: this.lazyLoadEager,
-      autoplay: this.autoplay,
-      autoplaySpeed: this.autoplaySpeed,
-      autoplayTimeout: this.autoplayTimeout,
-      autoplayHoverPause: this.autoplayHoverPause,
-      smartSpeed: this.smartSpeed,
-      fluidSpeed: this.fluidSpeed,
-      navSpeed: this.navSpeed,
-      dragEndSpeed: this.dragEndSpeed,
-      callbacks: this.callbacks,
-      responsive: this.responsive,
-      responsiveClass: this.responsiveClass,
-      responsiveRefreshRate: this.responsiveRefreshRate,
-      responsiveBaseElement: this.responsiveBaseElement,
-      video: this.video,
-      videoHeight: this.videoHeight,
-      videoWidth: this.videoWidth,
-      animateOut: this.animateOut,
-      animateIn: this.animateIn,
-      fallbackEasing: this.fallbackEasing,
-      info: this.info,
-      itemElement: this.itemElement,
-      stageElement: this.stageElement,
-      navContainer: this.navContainer,
-      dotsContainer: this.dotsContainer,
-      checkVisible: this.checkVisible,
-    });
-
-    // Set Owl instance and return it to its parent
-    this.owl = owl;
-    this.$emit('onOwlInit', this.owl);
-
-    $('#' + this.prevHandler).click(function() {
-      // eslint-disable-next-line no-invalid-this
-      this.owl.trigger('prev.owl.carousel');
-    });
-
-    $('#' + this.nextHandler).click(function() {
-      // eslint-disable-next-line no-invalid-this
-      this.owl.trigger('next.owl.carousel');
-    });
-
-    events.forEach((eventName) => {
-      this.owl.on(`${eventName}.owl.carousel`, (event) => {
-        this.$emit(eventName, event);
+    this.$nextTick(() => {
+      const owl = $('#' + this.elementHandle).owlCarousel({
+        items: this.items,
+        margin: this.margin,
+        loop: this.loop,
+        center: this.center,
+        mouseDrag: this.mouseDrag,
+        touchDrag: this.touchDrag,
+        pullDrag: this.pullDrag,
+        freeDrag: this.freeDrag,
+        stagePadding: this.stagePadding,
+        merge: this.merge,
+        mergeFit: this.mergeFit,
+        autoWidth: this.autoWidth,
+        startPosition: this.startPosition,
+        uRLhashListener: this.uRLhashListener,
+        nav: this.nav,
+        rewind: this.rewind,
+        navText: this.navText,
+        navElement: this.navElement,
+        slideBy: this.slideBy,
+        slideTransition: this.slideTransition,
+        dots: this.dots,
+        dotsEach: this.dotsEach,
+        dotsData: this.dotsData,
+        lazyLoad: this.lazyLoad,
+        lazyLoadEager: this.lazyLoadEager,
+        autoplay: this.autoplay,
+        autoplaySpeed: this.autoplaySpeed,
+        autoplayTimeout: this.autoplayTimeout,
+        autoplayHoverPause: this.autoplayHoverPause,
+        smartSpeed: this.smartSpeed,
+        fluidSpeed: this.fluidSpeed,
+        navSpeed: this.navSpeed,
+        dragEndSpeed: this.dragEndSpeed,
+        callbacks: this.callbacks,
+        responsive: this.responsive,
+        responsiveClass: this.responsiveClass,
+        responsiveRefreshRate: this.responsiveRefreshRate,
+        responsiveBaseElement: this.responsiveBaseElement,
+        video: this.video,
+        videoHeight: this.videoHeight,
+        videoWidth: this.videoWidth,
+        animateOut: this.animateOut,
+        animateIn: this.animateIn,
+        fallbackEasing: this.fallbackEasing,
+        info: this.info,
+        itemElement: this.itemElement,
+        stageElement: this.stageElement,
+        navContainer: this.navContainer,
+        dotsContainer: this.dotsContainer,
+        checkVisible: this.checkVisible,
       });
-    });
 
-    if (!this.loop) {
-      this.owl.on('changed.owl.carousel', (event) => {
-        // start
-        if (event.item.index === 0) {
-          this.showPrev = false;
-          this.showNext = true;
-        } else {
-          const currnetel = Math.floor(event.item.index + event.page.size);
-          // last
-          if (currnetel === event.item.count) {
-            this.showPrev = true;
-            this.showNext = false;
-          } else {
-            this.showPrev = true;
+      // Set Owl instance and return it to its parent
+      this.owl = owl;
+      this.$emit('onOwlInit', this.owl);
+
+      $('#' + this.prevHandler).click(function() {
+        // eslint-disable-next-line no-invalid-this
+        this.owl.trigger('prev.owl.carousel');
+      });
+
+      $('#' + this.nextHandler).click(function() {
+        // eslint-disable-next-line no-invalid-this
+        this.owl.trigger('next.owl.carousel');
+      });
+
+      events.forEach((eventName) => {
+        this.owl.on(`${eventName}.owl.carousel`, (event) => {
+          this.$emit(eventName, event);
+        });
+      });
+
+      if (!this.loop) {
+        this.owl.on('changed.owl.carousel', (event) => {
+          // start
+          if (event.item.index === 0) {
+            this.showPrev = false;
             this.showNext = true;
+          } else {
+            const currnetel = Math.floor(event.item.index + event.page.size);
+            // last
+            if (currnetel === event.item.count) {
+              this.showPrev = true;
+              this.showNext = false;
+            } else {
+              this.showPrev = true;
+              this.showNext = true;
+            }
           }
-        }
-      });
-    }
+        });
+      }
+    });
   },
   refresh() {
+    console.log('Refreshed')
     this.owl.trigger('refresh.owl.carousel');
   },
   destroy() {
