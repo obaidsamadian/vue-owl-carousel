@@ -161,13 +161,17 @@ export default {
       type: Object,
       default: () => {},
     },
+    responsiveClass: {
+      type: Boolean,
+      default: false,
+    },
     responsiveRefreshRate: {
       type: Number,
       default: 200,
     },
     responsiveBaseElement: {
-        type: String,
-        "default": "window"
+      type: String,
+      default: 'window',
     },
     video: {
       type: Boolean,
@@ -227,7 +231,7 @@ export default {
       elementHandle: 'carousel_' + this.generateUniqueId(),
       nextHandler: 'carousel_next_' + this.generateUniqueId(),
 
-      owl:null
+      owl: null,
     };
   },
 
@@ -268,6 +272,7 @@ export default {
       dragEndSpeed: this.dragEndSpeed,
       callbacks: this.callbacks,
       responsive: this.responsive,
+      responsiveClass: this.responsiveClass,
       responsiveRefreshRate: this.responsiveRefreshRate,
       responsiveBaseElement: this.responsiveBaseElement,
       video: this.video,
@@ -284,15 +289,17 @@ export default {
       checkVisible: this.checkVisible,
     });
 
-    //Set Owl instance and return it to its parent
+    // Set Owl instance and return it to its parent
     this.owl = owl;
-    this.$emit('onOwlInit',this.owl);
+    this.$emit('onOwlInit', this.owl);
 
     $('#' + this.prevHandler).click(function() {
+      // eslint-disable-next-line no-invalid-this
       this.owl.trigger('prev.owl.carousel');
     });
 
     $('#' + this.nextHandler).click(function() {
+      // eslint-disable-next-line no-invalid-this
       this.owl.trigger('next.owl.carousel');
     });
 
