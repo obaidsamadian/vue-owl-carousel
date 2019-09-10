@@ -12,5 +12,6 @@ export default [
   'translate',
   'translated',
   'to',
+  'change',
   'changed',
 ];
