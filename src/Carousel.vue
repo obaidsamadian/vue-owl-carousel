@@ -170,8 +170,10 @@ export default {
       default: 200,
     },
     responsiveBaseElement: {
-      type: String,
-      default: 'window',
+      type: Object,
+      default: ()=> {
+        window;
+      },
     },
     video: {
       type: Boolean,
@@ -332,7 +334,7 @@ export default {
     });
   },
   refresh() {
-    console.log('Refreshed')
+    console.log('Refreshed');
     this.owl.trigger('refresh.owl.carousel');
   },
   destroy() {
