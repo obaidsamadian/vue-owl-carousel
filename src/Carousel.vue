@@ -224,7 +224,7 @@ export default {
       default: true,
     },
   },
-  data: function() {
+  data: () => {
     return {
       showPrev: false,
       showNext: true,
@@ -237,7 +237,7 @@ export default {
     };
   },
 
-  mounted: function() {
+  mounted: () => {
     this.$nextTick(() => {
       const owl = $('#' + this.elementHandle).owlCarousel({
         items: this.items,
@@ -296,12 +296,12 @@ export default {
       this.owl = owl;
       this.$emit('onOwlInit', this.owl);
 
-      $('#' + this.prevHandler).click(function() {
+      $('#' + this.prevHandler).click(() => {
         // eslint-disable-next-line no-invalid-this
         this.owl.trigger('prev.owl.carousel');
       });
 
-      $('#' + this.nextHandler).click(function() {
+      $('#' + this.nextHandler).click(() => {
         // eslint-disable-next-line no-invalid-this
         this.owl.trigger('next.owl.carousel');
       });
