@@ -224,7 +224,7 @@ export default {
       default: true,
     },
   },
-  data: () => {
+  data() {
     return {
       showPrev: false,
       showNext: true,
@@ -237,7 +237,7 @@ export default {
     };
   },
 
-  mounted: () => {
+  mounted() {
     this.$nextTick(() => {
       const owl = $('#' + this.elementHandle).owlCarousel({
         items: this.items,
