@@ -296,12 +296,14 @@ export default {
       this.owl = owl;
       this.$emit('onOwlInit', this.owl);
 
-      $('#' + this.prevHandler).click(() => {
+      $('#' + this.prevHandler).click((e) => {
+        e.stopPropagation();
         // eslint-disable-next-line no-invalid-this
         this.owl.trigger('prev.owl.carousel');
       });
 
-      $('#' + this.nextHandler).click(() => {
+      $('#' + this.nextHandler).click((e) => {
+        e.stopPropagation();
         // eslint-disable-next-line no-invalid-this
         this.owl.trigger('next.owl.carousel');
       });
